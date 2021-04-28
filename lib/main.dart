@@ -31,11 +31,9 @@ class _PerguntaAppState extends State<PerguntaApp> {
     ];
 
     //criar lista de respostas
-    List<Widget> respostas = [];
+    List<String> respostas = perguntas[_perguntaSelecionada]['respostas'];
 
-    for (String textResp in perguntas[_perguntaSelecionada]['respostas']) {
-      respostas.add(Resposta(textResp, _responder));
-    }
+    respostas.map((t) => Resposta(t, _responder)).toList();
 
     return MaterialApp(
       home: Scaffold(
@@ -47,7 +45,8 @@ class _PerguntaAppState extends State<PerguntaApp> {
             Questao(perguntas[_perguntaSelecionada]['texto']),
             //... <= significa que um elemento pode estar dentro de outro elemento.
             //resumindo, uma lista pode estar dentro de outra lista.
-            ...respostas,
+            ...respostas.map((t) => Resposta(t, _responder)).toList(),
+            //Map serve para transformar uma lista em outra lista de outro tipo.
           ],
         ),
       ),
