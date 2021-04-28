@@ -30,6 +30,13 @@ class _PerguntaAppState extends State<PerguntaApp> {
       }
     ];
 
+    //criar lista de respostas
+    List<Widget> respostas = [];
+
+    for (String textResp in perguntas[_perguntaSelecionada]['respostas']) {
+      respostas.add(Resposta(textResp, _responder));
+    }
+
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -38,9 +45,9 @@ class _PerguntaAppState extends State<PerguntaApp> {
         body: Column(
           children: <Widget>[
             Questao(perguntas[_perguntaSelecionada]['texto']),
-            Resposta('Resposta 1', _responder),
-            Resposta('Resposta 2', _responder),
-            Resposta('Resposta 3', _responder),
+            //... <= significa que um elemento pode estar dentro de outro elemento.
+            //resumindo, uma lista pode estar dentro de outra lista.
+            ...respostas,
           ],
         ),
       ),
